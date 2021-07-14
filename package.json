@@ -1,0 +1,31 @@
+{
+  "name": "bitcoin-ira-appium-tests",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha -r ts-node/register 'tests/**/*.ts'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thetauk/bitcoin-ira-appium-tests.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thetauk/bitcoin-ira-appium-tests/issues"
+  },
+  "homepage": "https://github.com/thetauk/bitcoin-ira-appium-tests#readme",
+  "devDependencies": {
+    "@types/mocha": "^8.2.2",
+    "@wdio/cli": "^7.6.1",
+    "mocha": "^8.4.0",
+    "ts-node": "^10.0.0",
+    "typescript": "^4.2.4"
+  },
+  "dependencies": {
+    "@tauk.com/tauk": "^1.0.3",
+    "prettier": "^2.3.1"
+  }
+}
