@@ -5,6 +5,7 @@ export default {
     HomePage: {
         loginButton: "android=new UiSelector().text(\"Login\")",
         neverButton: "id:android:id/autofill_save_no",
+        askMeLaterButton: "android=new UiSelector().text(\"ASK ME LATER\")",
         yourProgressFragment: "android=new UiSelector().text(\"YOUR PROGRESS\")",
     },
     LoginEmailPage: {

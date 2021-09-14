@@ -1,11 +1,12 @@
 import {
-    TestDetails,
-    setUp,
-    tearDown,
-    initTest,
-    findElement,
     clickElement,
+    findElement,
+    initTest,
+    setUp,
     setValueOfElement,
+    tearDown,
+    TestDetails,
+    waitForElementToDisappear,
 } from "./testBase";
 import {androidCapabilities} from "./projectCapabilities";
 import AndroidBitcoinIRA from "./viewObjects/androidBitcoinIRA";
@@ -21,7 +22,7 @@ describe("Bitcoin IRA Android App", function () {
 
         // APK will be installed from dropbox
         testDetails.caps["app"] =
-            "https://www.dropbox.com/s/v9pqke1xoz5dgk4/bitcoin-ira.apk?dl=1";
+            "https://www.dropbox.com/s/gbze32vn39xtj0v/com.bitcoinira-1.3.8.apk?dl=1";
         testDetails.caps["fullReset"] = true;
 
         // APK will not be reinstalled
@@ -81,6 +82,36 @@ describe("Bitcoin IRA Android App", function () {
             AndroidBitcoinIRA.LoginPasswordPage.loginButton,
             200000
         );
+
+        await waitForElementToDisappear(
+            testDetails.driver,
+            AndroidBitcoinIRA.LoginPasswordPage.passwordField,
+            100000
+        );
+
+        const neverButton = await findElement(
+            testDetails.driver,
+            AndroidBitcoinIRA.HomePage.neverButton,
+            5000,
+            true
+        );
+
+        if (neverButton) {
+            console.log("Clicking on the [NEVER] Button");
+            neverButton.click();
+        }
+
+        const askMeLaterButton = await findElement(
+            testDetails.driver,
+            AndroidBitcoinIRA.HomePage.askMeLaterButton,
+            5000,
+            true
+        );
+
+        if (askMeLaterButton) {
+            console.log("Clicking on the [ASK ME LATER] Button");
+            askMeLaterButton.click();
+        }
     };
 
     beforeEach(async () => {

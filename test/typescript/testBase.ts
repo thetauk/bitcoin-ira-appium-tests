@@ -1,4 +1,4 @@
-import {remote, Browser, Element} from "webdriverio";
+import {Browser, Element, remote} from "webdriverio";
 
 const MAX_ELEMENT_THRESHOLD = 60000;
 
@@ -44,23 +44,46 @@ const tearDown = async (testDetails: TestDetails) => {
 
 // ------ Helper Methods -------
 
-const findElement = async (driver: Browser<any> | null, elementLocator: string, timeout: number = MAX_ELEMENT_THRESHOLD) => {
-    const loginButton: Element<any> = await driver.$(elementLocator);
-    await loginButton.waitForExist({timeout: timeout});
-    return loginButton;
+const findElement = async (driver: Browser<any> | null, elementLocator: string, timeout: number = MAX_ELEMENT_THRESHOLD, ignore_error = false) => {
+    try {
+        const el: Element<any> = await driver.$(elementLocator);
+        await el.waitForExist({timeout: timeout});
+        return el;
+    } catch (e) {
+        if (ignore_error) {
+            console.log(e.message);
+        } else {
+            throw e;
+        }
+    }
 }
 
 const clickElement = async (driver: Browser<any> | null, elementLocator: string, timeout: number = MAX_ELEMENT_THRESHOLD) => {
     await new Promise((r) => setTimeout(r, 5 * 1000));
-    const loginButton: Element<any> = await findElement(driver, elementLocator, timeout);
-    await loginButton.click();
+    const el: Element<any> = await findElement(driver, elementLocator, timeout);
+    await el.click();
 }
 
 const setValueOfElement = async (driver: Browser<any> | null, elementLocator: string, timeout: number = MAX_ELEMENT_THRESHOLD, value: string = "") => {
     await new Promise((r) => setTimeout(r, 5 * 1000));
-    const loginButton: Element<any> = await findElement(driver, elementLocator, timeout);
-    await loginButton.click();
-    await loginButton.setValue(value);
+    const el: Element<any> = await findElement(driver, elementLocator, timeout);
+    await el.click();
+    await el.setValue(value);
 }
 
-export {TestDetails, setUp, tearDown, initTest, findElement, clickElement, setValueOfElement};
+const waitForElementToDisappear = async (driver: Browser<any> | null, elementLocator: string, timeout: number = MAX_ELEMENT_THRESHOLD) => {
+    let timedOut = false;
+    let elementDisappeared = false;
+    setTimeout(() => {
+        timedOut = true;
+    }, timeout)
+    while (!timedOut && !elementDisappeared) {
+        let el = await findElement(driver, elementLocator, 0, true);
+        if (!el) {
+            elementDisappeared = true;
+        }
+    }
+    return elementDisappeared && !timedOut;
+}
+
+export {TestDetails, setUp, tearDown, initTest, findElement, clickElement, setValueOfElement, waitForElementToDisappear};
