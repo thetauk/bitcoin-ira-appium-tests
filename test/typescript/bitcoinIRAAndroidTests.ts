@@ -8,7 +8,7 @@ import {
     TestDetails,
     waitForElementToDisappear,
 } from "./testBase";
-import {androidCapabilities} from "./projectCapabilities";
+import { androidCapabilities } from "./projectCapabilities";
 import AndroidBitcoinIRA from "./viewObjects/androidBitcoinIRA";
 // import Tauk from "@tauk.com/tauk";
 
@@ -16,7 +16,7 @@ describe("Bitcoin IRA Android App", function () {
     this.timeout(500000);
     const appPackage = "com.bitcoinira";
     const testDetails: TestDetails = initTest();
-    // const tauk: Tauk = new Tauk("5WOnv-3zkqQRQYiOckRaqp6xg", "Z4TtU8pSs");
+    // const tauk: Tauk = new Tauk("your-api-token", "project-id");
     const preLaunch = (testDetails: TestDetails) => {
         testDetails.caps = androidCapabilities();
 
@@ -117,7 +117,9 @@ describe("Bitcoin IRA Android App", function () {
     beforeEach(async () => {
         await setUp(testDetails, preLaunch);
         // tauk.setDriver(testDetails.driver);
-        await login("taukautomation@gmail.com", "tauk.com");
+
+        // provide the account username and password
+        await login("username", "password");
     });
 
     afterEach(async () => {
