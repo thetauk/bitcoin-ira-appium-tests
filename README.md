@@ -8,7 +8,6 @@
 - [Appium](http://appium.io/)
 - [Node.js](https://nodejs.org/en/)
 - [Android Studio](https://developer.android.com/studio)
-- [Python 3](https://www.python.org/downloads/)
 
 ### Quick Start on macOS
 ```bash
@@ -22,4 +21,3 @@ $ appium --allow-insecure=get_server_logs
 ## Run Tests
 
  - [Typescript](./test/typescript/README.md)
- - [Python]()
