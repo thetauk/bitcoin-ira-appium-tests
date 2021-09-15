@@ -10,7 +10,7 @@ npm install
 
 ### Specific Test Case
 ```bash
-npx mocha -r ts-node/register 'tests/**/*.ts' --grep 'Login'
+npx mocha -r ts-node/register 'test/**/*.ts' --grep 'Login'
 ```
 
 ### Run All Test Cases
